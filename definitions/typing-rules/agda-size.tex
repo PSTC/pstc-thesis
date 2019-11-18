@@ -1,0 +1,45 @@
+\begin{figure}
+    \centering
+    
+    \begin{mathpar}
+    \infer[\defrule{size-var}]{
+        \upsilon: \Size
+    }{}
+    
+    \infer[\defrule{size-infty}]{
+        \infty: \Size
+    }{}
+    
+    \infer[\defrule{size-succ}]{
+        \uparrow s: \Size
+    }{
+        s: \Size
+    }
+    
+    \infer[\defrule{size-max}]{
+        s_1 \sqcup^s s_2 : \Size
+    }{
+        s_1: \Size \\
+        s_2: \Size
+    }
+    
+    \infer[\defrule{size-lt}]{
+        s_2: \Size
+    }{
+        s_2: \SizeLt s_1
+    }
+    
+    \infer[\defrule{sizeuniv-size}]{
+        \Size: \SizeUniv
+    }{}
+    
+    \infer[\defrule{sizeuniv-size-lt}]{
+        \SizeLt s: \SizeUniv
+    }{
+        s: \Size
+    }
+    \end{mathpar}
+    
+    \caption{Typing rules for sizes in Agda}
+    \label{fig:agda-size}
+\end{figure}

@@ -1,0 +1,46 @@
+\clearpage
+\onecolumn
+
+Note that we can rewrite the judgement $C \vdash e^\circ \Leftarrow u \rightsquigarrow C'', e$ as $C \vdash e^\circ \rightsquigarrow C', e \Rightarrow t$ with the side condition $C'' = C' \cup \set{t \preceq u}$.
+
+\begin{proposition}[Principle of Rule Induction for $C, \Gamma \vdash e^\circ \rightsquigarrow e \Rightarrow t$]
+Let $P$ be a property on size inference judgements. Then $P$ holds for all judgements if the following lemmata hold: 
+\begin{itemize}
+    \item \ldots skipping a few \ldots
+    \item Ignoring \textsc{elim} conditions, $\forall \dots$, 
+        \begin{lemma}
+        \begin{align*}
+            &P(C, \Gamma \vdash e^\circ \rightsquigarrow C_1, e \Rightarrow t) &&\wedge \whnf{t} = I_k^s\ \overline{p}\ \overline{a} \wedge \whnf{t_p} = \Pi \_. \varw \wedge \overline{\upsilon_i}\ \text{fresh} \\
+            &P(C_1, \Gamma \vdash \wp^\circ \rightsquigarrow C_2, \wp \Rightarrow t_p) &&\wedge C_3 = t_p \preceq \motivetype{\Sigma}{\overline{p}}{\varw}{I_k^s} \wedge \\
+            &P(C_3, \Gamma \vdash e^\circ_j \rightsquigarrow C_{4j}, e_j \Rightarrow t_j) &&\wedge C_5 = \bigcup_j C_{4j} \cup t_j \preceq \branchtype{\Sigma}{\overline{p}}{c_j}{\overline{\upsilon_i}}{\wp} \implies
+        \end{align*}
+        $$P(C, \Gamma \vdash \caseof{\wp^\circ}{e^\circ}{c_j}{e_j^\circ} \rightsquigarrow C_5, \caseof{|\wp|}{e}{c_j}{e_j} \Rightarrow \wp \overline{a} e).$$
+        \end{lemma}
+\end{itemize}
+\end{proposition}
+
+Let $\rho : \cdot \to \cdot$ be a metafunction that consistently substitutes every stage variable in the input by some stage annotation. We say that $\rho \vDash C$ if performing the substitution $\rho$ on the stage variables in $C$ still satisfies the constraints in $C$, i.e. $\rho C$ has no negative cycles. Notice that $\rho \vDash t \preceq u \implies \rho t \leq \rho u$.
+
+\begin{lemma}[Soundness of size inference]
+$\forall (C, \Gamma \vdash e^\circ \rightsquigarrow C', e \Rightarrow t), \forall \rho, \rho \vDash C \implies \rho \Gamma \vdash \rho e : \rho t$.
+\end{lemma}
+
+\begin{proof}
+Let $P(C, \Gamma \vdash e^\circ \rightsquigarrow C', e \Rightarrow t) = \forall \rho, \rho \vDash C \implies \rho \Gamma \vdash \rho e : \rho t$. By the principle of rule induction for size inference judgements, $P$ holds for all judgements if the following hold:
+\begin{itemize}
+    \item \ldots skipping a few \ldots
+    \item (Case). Suppose $C, \Gamma \vdash \caseof{\wp^\circ}{e^\circ}{c_j}{e_j^\circ} \rightsquigarrow C_5, \caseof{|\wp|}{e}{c_j}{e_j} \Rightarrow \wp \overline{a} e$ as well as the following:
+    \begin{align*}
+        C, \Gamma \vdash e^\circ \rightsquigarrow C_1, e \Rightarrow t && \rho \Gamma \vdash \rho e : \rho t && \whnf{t} = I_k^s\ \overline{p}\ \overline{a} \wedge \whnf{t_p} = \Pi \_. \varw \wedge \overline{\upsilon_i}\ \text{fresh}\\
+        C_1, \Gamma \vdash \wp^\circ \rightsquigarrow C_2, \wp \Rightarrow t_p && \rho \Gamma \vdash \rho \wp : \rho t_p && \rho t_p \leq \rho \motivetype{\Sigma}{\overline{p}}{\varw}{I_k^s} \\
+        C_3 \vdash e_j^\circ \rightsquigarrow C_{4j}, e_j \Rightarrow t_j && \rho \Gamma \vdash \rho e_j : \rho t_j && \rho t_j \leq \rho \branchtype{\Sigma}{\overline{p}}{c_j}{\overline{\upsilon_i}}{\wp}
+    \end{align*}
+    We need to show that $\rho \Gamma \vdash \rho \caseof{|\wp|}{e}{c_j}{e_j} : \rho \wp \overline{a} e$. By forward reasoning on the typing rules, we need to show the following:
+    \begin{enumerate}
+        \item $\rho \Gamma \vdash \rho e : \rho (I_k^{\hat{\upsilon}_k}\ \overline{p}\ \overline{a})$;
+        \item $\rho \Gamma \vdash \rho \wp : \rho \motivetype{\Sigma}{\overline{p}}{\varw}{I_k^{\hat{\upsilon}_k}}$;
+        \item $\rho \Gamma \vdash \rho e_j : \rho \branchtype{\Sigma}{\overline{p}}{c_j}{\overline{\upsilon_i}}{\wp}$.
+    \end{enumerate}
+    The third one holds by the third line of suppositions and \refrule{conv}. The second one holds by the second line of suppositions and \refrule{conv} if $\motivetype{\Sigma}{\overline{p}}{\varw}{I_k^s} \leq \motivetype{\Sigma}{\overline{p}}{\varw}{I_k^{\hat{\upsilon}_k}}$. The first one holds by the first line of suppositions, assuming $\Gamma \vdash e : t \implies \Gamma \vdash e : \whnf{t}$, and by \refrule{conv} if $I_k^s\ \overline{p}\ \overline{a} \leq I_k^{\hat{\upsilon}_k}\ \overline{p}\ \overline{a}$. Then we require that $s \sqsubseteq \hat{\upsilon}_k$ if $I$ is inductive and $\hat{\upsilon}_k \sqsubseteq s$ if $I$ is coinductive.
+\end{itemize}
+\end{proof}
