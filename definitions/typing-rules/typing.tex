@@ -2,7 +2,9 @@
 \centering
 \small
 
-\hfill\break
+\begin{flushleft}
+\fbox{$\sgg \vdash T : T$}
+\end{flushleft}
 
 \begin{tabular}{c c}
     \AxiomC{$\WF{\sgg}$}
@@ -56,7 +58,9 @@
 \RightLabel{\defrule{prod}}
 \TrinaryInfC{$\sgg \vdash \Pi x:t.u : \varw_3$}
 \DisplayProof
-\qquad
+
+\hfill\break
+
 \AxiomC{$\sgg (x:t) \vdash e:u$}
 \RightLabel{\defrule{abs}}
 \UnaryInfC{$\sgg \vdash \lambda x:|t|.e : \Pi x:t.u$}
@@ -80,12 +84,12 @@
 
 \AxiomC{$\WF{\sgg}$}
 \RightLabel{\defrule{ind}}
-\UnaryInfC{$\sgg \vdash I_k^s : \indtype{\Sigma}{I_k}$}
+\UnaryInfC{$\sgg \vdash I^s : \indtype{\Sigma}{I}$}
 \DisplayProof
 \qquad
 \AxiomC{$\WF{\sgg}$}
 \RightLabel{\defrule{constr}}
-\UnaryInfC{$\sgg \vdash c_\ell : \constrtype{\Sigma}{c_\ell}{\overline{s_i}}$}
+\UnaryInfC{$\sgg \vdash c : \constrtype{\Sigma}{c_}{\overline{s_i}}$}
 \DisplayProof
 
 \hfill\break
@@ -100,10 +104,10 @@
 \hfill\break
 
 \begin{tabular}{c c}
-\hspace{-2em}
-\AxiomC{$t_k \approx \Pi \Delta_{k_1} . \Pi x_k : I_k^{\upsilon_k}\ \overline{a}_k. \Pi \Delta_{k_2}. u_k \qquad \|\Delta_k\| = n_m - 1$}
+\hspace{-3em}
+\AxiomC{$t_k \approx \Pi \Delta_{1k} . \Pi x_k : I_k^{\upsilon_k}\ \overline{a}_k. \Pi \Delta_{2k}. u_k \qquad \|\Delta_k\| = n_m - 1$}
 \noLine
-\UnaryInfC{$\upsilon_k \pos \Delta_{k_1}, \Delta_{k_2}, u_k \qquad \upsilon_k \notin \SV{\Gamma, \Delta_k, \overline{a}_k, e_k} \qquad \upsilon_k, \lfloor s \rfloor \in \mathcal{P}$}
+\UnaryInfC{$\upsilon_k \pos \Delta_{1k}, \Delta_{2k}, u_k \qquad \upsilon_k \notin \SV{\Gamma, \Delta_k, \overline{a}_k, e_k} \qquad \upsilon_k, \lfloor s \rfloor \in \mathcal{P}$}
 \noLine
 \UnaryInfC{$\sgg \vdash t_k : \varw_k \qquad \sgg \overline{(f_k : t_k)} \vdash e_k : t_k[\upsilon_k \coloneqq \hat{\upsilon}_k]$}
 \RightLabel{\defrule{fix}}

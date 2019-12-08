@@ -17,16 +17,16 @@
     }
     
     \infer[\defrule{size-max}]{
-        s_1 \sqcup^s s_2 : \Size
+        r \sqcup^s s : \Size
     }{
-        s_1: \Size \\
-        s_2: \Size
+        r: \Size \\
+        s: \Size
     }
     
     \infer[\defrule{size-lt}]{
-        s_2: \Size
+        r: \Size
     }{
-        s_2: \SizeLt s_1
+        r: \SizeLt s
     }
     
     \infer[\defrule{sizeuniv-size}]{

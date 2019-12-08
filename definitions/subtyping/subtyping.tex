@@ -41,17 +41,17 @@
 \hfill\spacer
 
 \AxiomC{$I$ inductive}
-\AxiomC{$s_1 \sqsubseteq s_2$}
+\AxiomC{$r \sqsubseteq s$}
 \RightLabel{\defrule{st-ind}}
-\BinaryInfC{$I^{s_1} \leq I^{s_2}$}
+\BinaryInfC{$I^{r} \leq I^{s}$}
 \DisplayProof
 
 \hfill\spacer
 
 \AxiomC{$I$ coinductive}
-\AxiomC{$s_2 \sqsubseteq s_1$}
+\AxiomC{$s \sqsubseteq r$}
 \RightLabel{\defrule{st-coind}}
-\BinaryInfC{$I^{s_1} \leq I^{s_2}$}
+\BinaryInfC{$I^{r} \leq I^{s}$}
 \DisplayProof
 \caption{Subtyping rules}
 \label{fig:subtyping}
